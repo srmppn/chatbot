@@ -1,0 +1,12 @@
+# create a simple response for our bot.
+response = { "hi":"hello" }
+
+# create a function responsible for sending message and return the output.
+def send_message(message):
+  # check if the message is in the database or not.
+  if message in response:
+    # if message is in our database return the response.
+    return response[message]
+  else:
+    # otherwise return something else to tell the user that it doesn't have data in database.
+    return "I don't understand.."
