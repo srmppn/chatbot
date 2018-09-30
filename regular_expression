@@ -1,0 +1,33 @@
+import re
+def grammatically(message):
+    message = message.lower()
+    if 'me' in message:
+        return re.sub("me", "you", message)
+    if 'my' in message:
+        return re.sub("my", "your", message)
+    if 'your' in message:
+        return re.sub("your", "my", message)
+    if 'you' in message:
+        return re.sub("you", "me", message)
+    return message
+
+def matching(rule,msg):
+    response,phrase = "I don't understand..",None
+    for pattern,result in rule.items():
+        match = re.search(pattern.lower(),msg)
+        if match is not None:
+            response = result
+            if '{0}' in response:
+                phrase = match.group(1)
+    return response,phrase
+
+def send_msg(rule,msg):
+    ans,phrase = matching(rule,msg)
+    if '{0}' in ans:
+        phrase = grammatically(phrase)
+        ans = ans.format(phrase)
+    return ans
+rule = {"do you (.*)":"I {0}" , "What is (.*)":"It is {0}" , "Who are you (.*)" : ""}
+while(True):
+    msg = input("Human : ")
+    print("Bot : ",send_msg(rule,msg))
