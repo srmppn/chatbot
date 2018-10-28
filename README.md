@@ -1,1 +1,2 @@
-# chatbot
+# Chatbot
+this is rule-based chabot
